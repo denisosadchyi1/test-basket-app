@@ -1,12 +1,47 @@
 import React from  'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from  'styled-components';
+import { clearProducts } from '../../redux/actions/actions';
 import Product from '../Product'; 
+
+const LoadingWrapper = styled.div`
+  width: 300px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+const AllProductsWrapper = styled.div`
+  padding: 20px 0;
+  position: relative;
+`;
+
+const CloseButton = styled.div`
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  button{
+    padding: 4px 11px;
+    border-radius: 100%;
+    font-weight: bold;
+  }
+`;
 
 
 const AllProducts = () => {
-  const products = useSelector(state => state.products)
-  console.log(products)
+  const products = useSelector(state => state.products.products)
+  const loading = useSelector(state => state.app.loading)
+  const dispatch = useDispatch()
+
+  if(loading) {
+    return (
+      <LoadingWrapper>
+        <h5>Loading....</h5>
+      </LoadingWrapper>
+    )
+  }
+
   if(!products.length) {
     return (
       <div style={{width: '500px', margin: '0 auto'}}>
@@ -14,14 +49,22 @@ const AllProducts = () => {
       </div>
     )
   }
+
  return(
-  <div className="row">
-    {products.map(product => (
-      <div className="col-sm-3 mb-4" key={Date.now()}>
-        <Product name={product.name} cost={product.cost} />
-      </div>
-      )) }
-  </div>
+  <AllProductsWrapper>
+    <CloseButton>
+      <button 
+        className="btn btn-danger"
+        onClick={() => dispatch(clearProducts())}>X</button>
+    </CloseButton>
+    <div className="row">
+      {products.map(product => (
+        <div className="col-sm-3 mb-4" key={Date.now() + product.id}>
+          <Product name={product.name} cost={product.cost} />
+        </div>
+        )) }
+    </div>
+  </AllProductsWrapper>
  ) 
 }
 
