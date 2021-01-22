@@ -1,4 +1,4 @@
-import { LOAD_PRODUCTS, SHOW_LOADER, HIDE_LOADER, CLEAR_PRODUCTS } from "./actionsType"
+import { LOAD_PRODUCTS, SHOW_LOADER, HIDE_LOADER, CLEAR_PRODUCTS, ADD_TO_BASKET } from "./actionsType"
 
 export const putData = (data) => {
   return {
@@ -29,6 +29,7 @@ export const loadProducts = () => async (dispatch) => {
     }
     catch(e) {
       // dispatch(showAlert('Something go wrong'))
+      console.log(e)
       dispatch(hideLoader())
     }
 }  
@@ -36,5 +37,12 @@ export const loadProducts = () => async (dispatch) => {
 export const clearProducts = () => {
   return {
     type: CLEAR_PRODUCTS
+  }
+}
+
+export const addToBasket = (id) => {
+  return {
+    type: ADD_TO_BASKET,
+    payload: id
   }
 }

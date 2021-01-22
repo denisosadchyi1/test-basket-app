@@ -1,5 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { addToBasket } from "../../redux/actions/actions";
 
 const ProductWrapper = styled.div`
   position: relative;
@@ -26,7 +28,8 @@ const PriceWrapper = styled.div`
 
 
 
-const Product = ({ name, cost }) => {
+const Product = ({ name, cost, id }) => {
+  const dispatch = useDispatch()
   return (
     <ProductWrapper className="card mt-3">
       <div className="card-body">
@@ -45,7 +48,9 @@ const Product = ({ name, cost }) => {
           </PriceWrapper>
         </div>
       </div>
-      <button className="btn btn-success">Добавить в корзину</button>
+      <button 
+        className="btn btn-success"
+        onClick={() => dispatch(addToBasket(id))}>Добавить в корзину</button>
     </ProductWrapper>
   );
 };

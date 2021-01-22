@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from "react-redux";
 
 const NavigationWrapper = styled.div`
   a{
@@ -25,7 +26,22 @@ const Item = styled.div`
   width: 100px;
 `;
 
+const BasketItem = styled.div`
+  padding: 10px 0;
+  width: 50px;
+  display: flex;
+  justify-content: space-between;
+  p{
+    color: darkgreen;
+    font-weight: 800;
+    font-size: 17px;
+    margin-top: 3px;
+  }
+`;
+
 const Navigation = () => {
+  const countOfProducts = useSelector(state => state.products.basketProducts.length)
+  console.log(countOfProducts)
   return (
     <NavigationWrapper>
       <NavigationItem className="navbar navbar-expand-lg navbar-light">
@@ -36,9 +52,14 @@ const Navigation = () => {
             </NavLink>
           </Item>
           <Item>
-            <NavLink to="/basket">
-            <FontAwesomeIcon icon={faShoppingBasket} />
-            </NavLink>
+            <BasketItem>
+              <NavLink to="/basket">
+              <FontAwesomeIcon icon={faShoppingBasket} />
+              </NavLink>
+              {
+                countOfProducts === 0  ? '' : <p>{countOfProducts}</p>
+              }
+            </BasketItem>
           </Item>
         </div>
       </NavigationItem>
