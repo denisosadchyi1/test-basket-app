@@ -13,7 +13,7 @@ const NavigationWrapper = styled.div`
     font-weight: 700;
   }
   a:hover{
-    color: grey;
+    color: #007bff;
   }
 `;
 
@@ -28,7 +28,7 @@ const Item = styled.div`
 
 const BasketItem = styled.div`
   padding: 10px 0;
-  width: 50px;
+  width: 120px;
   display: flex;
   justify-content: space-between;
   p{
@@ -39,9 +39,14 @@ const BasketItem = styled.div`
   }
 `;
 
+
 const Navigation = () => {
   const countOfProducts = useSelector(state => state.products.basketProducts.length)
-  console.log(countOfProducts)
+  const prices = useSelector(state => state.products.basketProducts)
+  let totalPrice = 0
+  prices.map(product => {
+    totalPrice = totalPrice + product.cost
+  })
   return (
     <NavigationWrapper>
       <NavigationItem className="navbar navbar-expand-lg navbar-light">
@@ -57,7 +62,9 @@ const Navigation = () => {
               <FontAwesomeIcon icon={faShoppingBasket} />
               </NavLink>
               {
-                countOfProducts === 0  ? '' : <p>{countOfProducts}</p>
+                countOfProducts === 0  
+                ? '' 
+                : <div><p>{countOfProducts} ({totalPrice}$)</p></div>
               }
             </BasketItem>
           </Item>
