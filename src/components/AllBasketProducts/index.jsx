@@ -10,15 +10,15 @@ const AllBasketProductsWrapper = styled.div`
 const AllBasketProducts = () => {
 
   const basketProducts = useSelector(state => state.products.basketProducts)
-  
+  console.log(basketProducts)
   return (
     <AllBasketProductsWrapper>
     <div className="col">
       {basketProducts.map(product => (
         <div className="col-sm-3 mb-4" key={Date.now() + product.id}>
-         <BasketProduct name={product.name} cost={product.cost} id={product.id} />
+           <BasketProduct name={product.name} cost={product.cost} id={product.id} quantity={product.quantity} />
         </div>
-        )) }
+        ) ) }
     </div>
     </AllBasketProductsWrapper>
   )

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { addToBasket } from "../../redux/actions/actions";
+import { addQuantity, addToBasket } from "../../redux/actions/actions";
 
 const ProductWrapper = styled.div`
   position: relative;
@@ -27,8 +27,17 @@ const PriceWrapper = styled.div`
 `; 
 
 
-
-const Product = ({ name, cost, id }) => {
+const Product = ({ name, cost, id, quantity }) => {
+  const addBasketQuantity = (id, quantity) => {
+    if(quantity === 0) {
+      console.log(quantity, 'first quantity')
+      console.log(id)
+      dispatch(addToBasket(id))
+    } else if (quantity > 0) {
+      console.log('second quantity', quantity)
+      dispatch(addQuantity(id))
+    }
+  }
   const dispatch = useDispatch()
   return (
     <ProductWrapper className="card mt-3">
@@ -50,7 +59,7 @@ const Product = ({ name, cost, id }) => {
       </div>
       <button 
         className="btn btn-success"
-        onClick={() => dispatch(addToBasket(id))}>Добавить в корзину</button>
+        onClick={() => addBasketQuantity(id, quantity)}>Добавить в корзину</button>
     </ProductWrapper>
   );
 };

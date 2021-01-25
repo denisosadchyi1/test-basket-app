@@ -42,10 +42,12 @@ const BasketItem = styled.div`
 
 const Navigation = () => {
   const countOfProducts = useSelector(state => state.products.basketProducts.length)
-  const prices = useSelector(state => state.products.basketProducts)
+  const pricesAndQuantity= useSelector(state => state.products.basketProducts)
   let totalPrice = 0
-  prices.map(product => {
-    totalPrice = totalPrice + product.cost
+  let totalQuantity = 0
+  pricesAndQuantity.map(product => {
+    totalPrice = totalPrice + product.cost * product.quantity
+    totalQuantity = totalQuantity + product.quantity
   })
   return (
     <NavigationWrapper>
@@ -64,7 +66,7 @@ const Navigation = () => {
               {
                 countOfProducts === 0  
                 ? '' 
-                : <div><p>{countOfProducts} ({totalPrice}$)</p></div>
+                : <div><p>{totalQuantity} ({totalPrice}$)</p></div>
               }
             </BasketItem>
           </Item>

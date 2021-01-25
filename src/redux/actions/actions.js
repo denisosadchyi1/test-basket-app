@@ -1,4 +1,4 @@
-import { LOAD_PRODUCTS, SHOW_LOADER, HIDE_LOADER, CLEAR_PRODUCTS, ADD_TO_BASKET } from "./actionsType"
+import { LOAD_PRODUCTS, SHOW_LOADER, HIDE_LOADER, CLEAR_PRODUCTS, ADD_TO_BASKET, ADD_QUANTITY, ADD_BASKET_QUANTITY, SUB_BASKET_QUANTITY } from "./actionsType"
 
 export const putData = (data) => {
   return {
@@ -43,6 +43,28 @@ export const clearProducts = () => {
 export const addToBasket = (id) => {
   return {
     type: ADD_TO_BASKET,
+    payload: id
+    
+  }
+}
+
+export const addQuantity = (id) => {
+  return {
+    type: ADD_QUANTITY,
+    payload: id
+  }
+}
+
+export const addBasketQuantity = (id) => {
+  return {
+    type: ADD_BASKET_QUANTITY,
+    payload: id
+  }
+}
+
+export const subBasketQuantity = (id) => {
+  return {
+    type: SUB_BASKET_QUANTITY,
     payload: id
   }
 }

@@ -60,7 +60,7 @@ const AllProducts = () => {
     <div className="row">
       {products.map(product => (
         <div className="col-sm-3 mb-4" key={Date.now() + product.id}>
-          <Product name={product.name} cost={product.cost} id={product.id} />
+          <Product name={product.name} cost={product.cost} id={product.id} quantity={product.quantity} />
         </div>
         )) }
     </div>
