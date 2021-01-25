@@ -1,4 +1,4 @@
-import { ADD_BASKET_QUANTITY, ADD_QUANTITY, ADD_TO_BASKET, CLEAR_PRODUCTS, LOAD_PRODUCTS } from "../actions/actionsType";
+import { ADD_BASKET_QUANTITY, ADD_QUANTITY, ADD_TO_BASKET, CLEAR_PRODUCTS, LOAD_PRODUCTS, SUB_BASKET_QUANTITY } from "../actions/actionsType";
 
 const initialState = {
   products: [],
@@ -41,8 +41,6 @@ export const productReducer = (state = initialState, action) => {
         }
         return item
       })
-
-      // let tempBasket = state.products.filter(product => product.id === action.payload)
       let tempBasket = state.products.filter(product => product.id === action.payload).map(item => {
         if (item.id === action.payload) {
           item = {...item, quantity: item.quantity + 1}
@@ -54,9 +52,6 @@ export const productReducer = (state = initialState, action) => {
         products: tempProduct,
         basketProducts: [...state.basketProducts, ...tempBasket]
       }
-
-
-      // return {...state, basketProducts: [...state.basketProducts, ...state.products.filter(product => product.id === action.payload)]}
     }
     if(action.type === ADD_QUANTITY){
       let tempBasket = state.basketProducts.map(item => {
@@ -65,6 +60,23 @@ export const productReducer = (state = initialState, action) => {
         }
         return item
       })
+      return {
+        ...state,
+        basketProducts: tempBasket
+      }
+    }
+    if(action.type === SUB_BASKET_QUANTITY) {
+      let tempBasket = []
+      if(action.payload.quantity === 1) {
+        tempBasket = state.basketProducts.filter(item => item.id !== action.payload.id)
+      } else if(action.payload.quantity > 1) {
+        tempBasket = state.basketProducts.map(item => {
+          if(item.id === action.payload.id) {
+            item = {...item, quantity: item.quantity - 1}
+          }
+          return item
+        })
+      }
       return {
         ...state,
         basketProducts: tempBasket

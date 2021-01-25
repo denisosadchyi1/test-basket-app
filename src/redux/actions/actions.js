@@ -62,9 +62,12 @@ export const addBasketQuantity = (id) => {
   }
 }
 
-export const subBasketQuantity = (id) => {
+export const subBasketQuantity = (id, quantity) => {
   return {
     type: SUB_BASKET_QUANTITY,
-    payload: id
+    payload: {
+      id,
+      quantity
+    }
   }
 }

@@ -49,7 +49,7 @@ const BasketProduct = ({name, cost, quantity, id}) => {
               <div>
                 <button 
                   className="btn btn-danger"
-                  onClick={() => dispatch(subBasketQuantity(id))}>-</button>
+                  onClick={() => dispatch(subBasketQuantity(id, quantity))}>-</button>
               </div>
               <div>
                 <h5 className="card-title" id="phone">
