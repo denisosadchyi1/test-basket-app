@@ -6,6 +6,8 @@ const BasketWrapper = styled.div`
   width: 800px;
   margin: 100px auto;
   background: #e6dcdc;
+  display: flex;
+  justify-content: center;
 `;
 
 const Basket = () => {

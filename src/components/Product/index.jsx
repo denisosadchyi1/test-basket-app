@@ -7,7 +7,7 @@ const ProductWrapper = styled.div`
   position: relative;
   color: #000;
   width: 300px;
-  height: 200px;
+  height: 350px;
   background: #fff;
   label {
     font-size: 17px;
@@ -15,19 +15,29 @@ const ProductWrapper = styled.div`
 `;
 
 const ProductItemWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
+  text-align: center;
+  width: 170px;
+  margin: 35px auto;
 `;
 
 const PriceWrapper = styled.div`
   position: absolute;
   bottom: 30px;
-  left: 0;
+  right: 0;
 `; 
 
+const ImgWrapper = styled.div`
+  width: 150px;
+  height: 185px;
+  margin: 0 auto;
+  img{
+    width: 155px;
+    height: 185px;
+  }
+`;
 
-const Product = ({ name, cost, id, quantity }) => {
+
+const Product = ({ name, cost, id, quantity, img }) => {
   const addBasketQuantity = (id, quantity) => {
     if(quantity === 0) {
       console.log(quantity, 'first quantity')
@@ -42,20 +52,19 @@ const Product = ({ name, cost, id, quantity }) => {
   return (
     <ProductWrapper className="card mt-3">
       <div className="card-body">
-        <div className="row">
-          <ProductItemWrapper className="col">
-            <label htmlFor="name">Найменование</label>
+          <ImgWrapper>
+            <img src={img} alt=""/>
+          </ImgWrapper>
+          <ProductItemWrapper>
             <h5 className="card-title" id="name">
               {name}
             </h5>
           </ProductItemWrapper>
-          <PriceWrapper className="col">
-            <label htmlFor="phone">Цена</label>
+          <PriceWrapper>
             <h5 className="card-title" id="phone">
-              {cost}
+              ${cost}
             </h5>
           </PriceWrapper>
-        </div>
       </div>
       <button 
         className="btn btn-success"
