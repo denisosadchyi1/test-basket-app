@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { addQuantity, addToBasket } from "../../redux/actions/actions";
 
@@ -39,7 +39,11 @@ const ImgWrapper = styled.div`
 
 const Product = ({ name, cost, id, quantity, img }) => {
   console.log(quantity)
+  const basketProducts = useSelector(state => state.products.basketProducts)
+  const products = useSelector(state => state.products.products)
+
   const addBasketQuantity = (id, quantity) => {
+    console.log(quantity)
     if(quantity === 0) {
       console.log(quantity, 'first quantity')
       console.log(id)

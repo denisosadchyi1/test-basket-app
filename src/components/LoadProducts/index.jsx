@@ -15,12 +15,13 @@ const LoadProductsButton = styled.button`
 `;
 
 const LoadProducts = () => {
+  const status = useSelector(state => state.app.status)
   const dispatch = useDispatch()
   return (
     <LoadProductsWrapper>
       <LoadProductsButton 
         className="btn btn-primary"
-        onClick={() => dispatch(loadProducts())}>Load Products</LoadProductsButton>
+        onClick={() => dispatch(loadProducts(status))}>Load Products</LoadProductsButton>
     </LoadProductsWrapper>
   )
 }

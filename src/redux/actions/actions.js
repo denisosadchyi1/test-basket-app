@@ -1,4 +1,4 @@
-import { LOAD_PRODUCTS, SHOW_LOADER, HIDE_LOADER, CLEAR_PRODUCTS, ADD_TO_BASKET, ADD_QUANTITY, ADD_BASKET_QUANTITY, SUB_BASKET_QUANTITY } from "./actionsType"
+import { LOAD_PRODUCTS, SHOW_LOADER, HIDE_LOADER, CLEAR_PRODUCTS, ADD_TO_BASKET, ADD_QUANTITY, ADD_BASKET_QUANTITY, SUB_BASKET_QUANTITY, CHANGE_STATUS } from "./actionsType"
 
 export const putData = (data) => {
   return {
@@ -19,12 +19,29 @@ export const hideLoader = () => {
   }
 }
 
-export const loadProducts = () => async (dispatch) => {
+export const changeStatus = () => {
+  return {
+    type: CHANGE_STATUS
+  }
+}
+
+export const clearProducts = () => {
+  return {
+    type: CLEAR_PRODUCTS
+  }
+}
+
+export const loadProducts = (status) => async (dispatch) => {
     try{
       dispatch(showLoader())
       const response = await fetch('https://my-json-server.typicode.com/denisosadchyi1/mockend-db/products')
       const json = await response.json()
-      dispatch(putData(json))
+      console.log(status)
+      if(status) {
+        dispatch(putData(json))
+      }
+      dispatch(changeStatus())
+      // dispatch(clearProducts())
       dispatch(hideLoader())
     }
     catch(e) {
@@ -33,12 +50,6 @@ export const loadProducts = () => async (dispatch) => {
       dispatch(hideLoader())
     }
 }  
-
-export const clearProducts = () => {
-  return {
-    type: CLEAR_PRODUCTS
-  }
-}
 
 export const addToBasket = (id) => {
   return {

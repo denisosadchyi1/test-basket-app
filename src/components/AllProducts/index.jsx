@@ -31,6 +31,7 @@ const CloseButton = styled.div`
 
 const AllProducts = () => {
   const products = useSelector(state => state.products.products)
+  const showProducts = useSelector(state => state.products.showProduct)
   const loading = useSelector(state => state.app.loading)
   const dispatch = useDispatch()
 
@@ -42,7 +43,7 @@ const AllProducts = () => {
     )
   }
 
-  if(!products.length) {
+  if(!products.length || showProducts === false) {
     return (
       <div style={{width: '500px', margin: '0 auto'}}>
         <h5 style={{textAlign:'center'}}>Продукции пока нету, нажмите на кнопку чтобы загрузить товары :)</h5>
