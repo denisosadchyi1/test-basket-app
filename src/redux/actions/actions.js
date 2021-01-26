@@ -1,4 +1,4 @@
-import { LOAD_PRODUCTS, SHOW_LOADER, HIDE_LOADER, CLEAR_PRODUCTS, ADD_TO_BASKET, ADD_QUANTITY, ADD_BASKET_QUANTITY, SUB_BASKET_QUANTITY, CHANGE_STATUS } from "./actionsType"
+import { LOAD_PRODUCTS, SHOW_LOADER, HIDE_LOADER, CLEAR_PRODUCTS, ADD_TO_BASKET, ADD_QUANTITY, ADD_BASKET_QUANTITY, SUB_BASKET_QUANTITY, CHANGE_STATUS, SHOW_PRODUCT } from "./actionsType"
 
 export const putData = (data) => {
   return {
@@ -31,6 +31,12 @@ export const clearProducts = () => {
   }
 }
 
+export const showProduct = () => {
+  return {
+    type: SHOW_PRODUCT
+  }
+}
+
 export const loadProducts = (status) => async (dispatch) => {
     try{
       dispatch(showLoader())
@@ -41,6 +47,7 @@ export const loadProducts = (status) => async (dispatch) => {
         dispatch(putData(json))
       }
       dispatch(changeStatus())
+      dispatch(showProduct())
       // dispatch(clearProducts())
       dispatch(hideLoader())
     }
