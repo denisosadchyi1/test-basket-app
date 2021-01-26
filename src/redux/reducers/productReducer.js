@@ -1,31 +1,9 @@
 import { ADD_BASKET_QUANTITY, ADD_QUANTITY, ADD_TO_BASKET, CLEAR_PRODUCTS, LOAD_PRODUCTS, SUB_BASKET_QUANTITY } from "../actions/actionsType";
 
 const initialState = {
-  products: [],
-  basketProducts: []
+  products: JSON.parse(localStorage.getItem('Products')) === null ? [] : JSON.parse(localStorage.getItem('Products')),
+  basketProducts: JSON.parse(localStorage.getItem('Basket')) === null ? [] : JSON.parse(localStorage.getItem('Basket'))
 }
-
-// export const productReducer = (state = initialState, action) => {
-//   switch(action.type) {
-//     case LOAD_PRODUCTS:
-//       return {...state, products: action.payload}
-//     case CLEAR_PRODUCTS:
-//       return {...state, products: []}
-//     case ADD_TO_BASKET:
-//       return {...state, basketProducts: [...state.basketProducts, ...state.products.filter(product => product.id === action.payload && product.quantity === 0)]}
-//     case ADD_QUANTITY:
-//       state.products.map(product => {
-//         if (product.id === action.payload) {
-//           product.quantity = product.quantity + 1
-//           return {
-//             ...state,
-            
-//           }
-//         }
-//       })
-//     default: return state;
-//   }
-// }
 
 export const productReducer = (state = initialState, action) => {
     if(action.type === LOAD_PRODUCTS){
@@ -47,22 +25,29 @@ export const productReducer = (state = initialState, action) => {
         }
         return item
       })
+      let tmpArr = []
+      tmpArr =  [...state.basketProducts, ...tempBasket]
+      localStorage.setItem('Basket', JSON.stringify(tmpArr));
+      console.log(tmpArr)
+      localStorage.setItem('Products', JSON.stringify(tempProduct));
       return {
         ...state,
-        products: tempProduct,
-        basketProducts: [...state.basketProducts, ...tempBasket]
+        products: JSON.parse(localStorage.getItem('Products')),
+        basketProducts: JSON.parse(localStorage.getItem('Basket'))
       }
     }
     if(action.type === ADD_QUANTITY){
       let tempBasket = state.basketProducts.map(item => {
+        console.log(item)
         if(item.id === action.payload) {
           item = {...item, quantity: item.quantity + 1}
         }
         return item
       })
+      localStorage.setItem('Basket', JSON.stringify(tempBasket));
       return {
         ...state,
-        basketProducts: tempBasket
+        basketProducts: JSON.parse(localStorage.getItem('Basket'))
       }
     }
     if(action.type === SUB_BASKET_QUANTITY) {
@@ -77,9 +62,10 @@ export const productReducer = (state = initialState, action) => {
           return item
         })
       }
+      localStorage.setItem('Basket', JSON.stringify(tempBasket));
       return {
         ...state,
-        basketProducts: tempBasket
+        basketProducts: JSON.parse(localStorage.getItem('Basket'))
       }
     }
   return state;

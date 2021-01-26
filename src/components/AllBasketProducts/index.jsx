@@ -15,7 +15,7 @@ const AllBasketProducts = () => {
     <AllBasketProductsWrapper>
     <div className="col">
       {basketProducts.map(product => (
-        <div className="col-sm-3 mb-4" key={Date.now() + product.id}>
+        <div className="col-sm-3 mb-4" key={Date.now() + product.id + Math.random()}>
            <BasketProduct name={product.name} cost={product.cost} id={product.id} quantity={product.quantity} img={product.url} />
         </div>
         ) ) }

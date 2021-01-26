@@ -38,6 +38,7 @@ const ImgWrapper = styled.div`
 
 
 const Product = ({ name, cost, id, quantity, img }) => {
+  console.log(quantity)
   const addBasketQuantity = (id, quantity) => {
     if(quantity === 0) {
       console.log(quantity, 'first quantity')
