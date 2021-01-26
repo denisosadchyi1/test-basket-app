@@ -7,18 +7,20 @@ import { useSelector } from "react-redux";
 
 const NavigationWrapper = styled.div`
   a{
+    color: #fff;
     text-decoration: none;
-    color: #000;
+    /* color: #000; */
     font-size: 20px;
     font-weight: 700;
   }
   a:hover{
-    color: #007bff;
+    color: yellow;
   }
 `;
 
 const NavigationItem = styled.nav`
-  background-color: #e6dcdc;
+  /* background-color: #e6dcdc; */
+  background:  #007bff;
 `;
 
 const Item = styled.div`
@@ -32,7 +34,7 @@ const BasketItem = styled.div`
   display: flex;
   justify-content: space-between;
   p{
-    color: darkgreen;
+    color: #fff;
     font-weight: 800;
     font-size: 17px;
     margin-top: 3px;
