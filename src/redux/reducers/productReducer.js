@@ -6,6 +6,8 @@ const initialState = {
   showProduct: false
 }
 
+//rewrite
+
 export const productReducer = (state = initialState, action) => {
     if(action.type === LOAD_PRODUCTS){
       localStorage.setItem('Products', JSON.stringify(action.payload));

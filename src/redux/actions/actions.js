@@ -37,6 +37,8 @@ export const showProduct = () => {
   }
 }
 
+//rewrite
+
 export const loadProducts = (status) => async (dispatch) => {
     try{
       dispatch(showLoader())
