@@ -59,8 +59,16 @@ export const productReducer = (state = initialState, action) => {
     }
     if(action.type === SUB_BASKET_QUANTITY) {
       let tempBasket = []
+      let tempProduct = []
       if(action.payload.quantity === 1) {
         tempBasket = state.basketProducts.filter(item => item.id !== action.payload.id)
+        tempProduct = state.products.map(product => {
+          if(product.id === action.payload.id) {
+            product = {...product, quantity: 0}
+          }
+          return product
+        })
+        localStorage.setItem('Products', JSON.stringify(tempProduct));
       } else if(action.payload.quantity > 1) {
         tempBasket = state.basketProducts.map(item => {
           if(item.id === action.payload.id) {
@@ -72,7 +80,8 @@ export const productReducer = (state = initialState, action) => {
       localStorage.setItem('Basket', JSON.stringify(tempBasket));
       return {
         ...state,
-        basketProducts: JSON.parse(localStorage.getItem('Basket'))
+        basketProducts: JSON.parse(localStorage.getItem('Basket')),
+        products: JSON.parse(localStorage.getItem('Products'))
       }
     }
   return state;

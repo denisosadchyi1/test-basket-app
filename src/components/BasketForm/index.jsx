@@ -17,7 +17,6 @@ const BasketForm = () => {
         </label>
         <input
           type="text"
-          readonly
           className="form-control"
           id="staticEmail2"
           value="email@example.com"
