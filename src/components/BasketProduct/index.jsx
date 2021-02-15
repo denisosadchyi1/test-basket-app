@@ -1,57 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import { addQuantity, subBasketQuantity } from "../../redux/actions/actions";
 import {
-  addBasketQuantity,
-  addQuantity,
-  subBasketQuantity,
-} from "../../redux/actions/actions";
-
-const BasketProductWrapper = styled.div`
-  width: 550px;
-  height: 150px;
-`;
-
-const CardWrapper = styled.div`
-  justify-content: space-between;
-  display: flex;
-`;
-
-const AmountWrapper = styled.div`
-  width: 130px;
-  margin: 30px auto;
-  display: flex;
-  justify-content: space-between;
-  h5 {
-    margin-top: 5px;
-    font-weight: 700;
-    font-size: 22px;
-  }
-`;
-
-const ProductNameWrapper = styled.div`
-  width: 190px;
-  margin-top: 30px;
-  margin-left: 10px;
-  h5{
-    font-size: 20px;
-  }
-`;
-
-const ProductPrice = styled.div`
-  width: 170px;
-  margin-top: 20px;
-`;
-
-const ImgWrapper = styled.div`
-  width: 170px;
-  height: 100px;
-  margin: 0 auto;
-  img {
-    width: 90px;
-    height: 110px;
-  }
-`;
+  BasketProductWrapper,
+  CardWrapper,
+  ImgWrapper,
+  ProductNameWrapper,
+  ProductPrice,
+  AmountWrapper,
+} from "./styles";
 
 const BasketProduct = ({ name, cost, quantity, id, img }) => {
   const Quantity = useSelector((state) => state.products.basketProducts);
@@ -66,7 +23,7 @@ const BasketProduct = ({ name, cost, quantity, id, img }) => {
     <BasketProductWrapper className="card mt-3">
       <CardWrapper className="card-body">
         <ImgWrapper>
-          <img src={img} alt="" />
+          <img src={img} alt="Product img" />
         </ImgWrapper>
         <ProductNameWrapper>
           <h5 className="card-title" id="name">

@@ -1,12 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-
-const BasketFormWrapper = styled.form`
-  /* width: 300px; */
-  div{
-    margin: 15px 0;
-  }
-`;
+import {BasketFormWrapper} from './styles';
 
 const BasketForm = () => {
   return (

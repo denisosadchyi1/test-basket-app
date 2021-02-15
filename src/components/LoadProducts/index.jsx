@@ -1,29 +1,24 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import {loadProducts} from '../../redux/actions/actions';
-
-const LoadProductsWrapper = styled.div`
-  width: 150px;
-  margin: 30px auto;
-`;
-
-const LoadProductsButton = styled.button`
-  width: 150px;
-  font-weight: 700;
-  border-radius: 4px;
-`;
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadProductsData } from "../../redux/operations/operations";
+import { LoadProductsButton, LoadProductsWrapper } from "./styles";
 
 const LoadProducts = () => {
-  const status = useSelector(state => state.app.status)
-  const dispatch = useDispatch()
+  const status = useSelector((state) => state.app.status);
+  const dispatch = useDispatch();
+  const loadProductsHandler = () => {
+    dispatch(loadProductsData(status));
+  };
   return (
     <LoadProductsWrapper>
-      <LoadProductsButton 
+      <LoadProductsButton
         className="btn btn-primary"
-        onClick={() => dispatch(loadProducts(status))}>Load Products</LoadProductsButton>
+        onClick={loadProductsHandler}
+      >
+        Load Products
+      </LoadProductsButton>
     </LoadProductsWrapper>
-  )
-}
+  );
+};
 
 export default LoadProducts;

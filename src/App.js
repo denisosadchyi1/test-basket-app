@@ -1,8 +1,8 @@
 import React from  'react';
 import {Switch, Route} from  'react-router-dom';
 import Navigation from './components/Navigation';
-import Basket from './pages/Basket';
-import Home from './pages/Home';
+import Basket from './pages/BasketPage/Basket';
+import Home from './pages/HomePage/Home';
 
 const App = () => {
 

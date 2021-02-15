@@ -1,4 +1,4 @@
-import { ADD_BASKET_QUANTITY, ADD_QUANTITY, ADD_TO_BASKET, CLEAR_PRODUCTS, LOAD_PRODUCTS, SHOW_PRODUCT, SUB_BASKET_QUANTITY } from "../actions/actionsType";
+import { ADD_QUANTITY, ADD_TO_BASKET, CLEAR_PRODUCTS, LOAD_PRODUCTS, SHOW_PRODUCT, SUB_BASKET_QUANTITY } from "../actions/actionsType";
 
 const initialState = {
   products: JSON.parse(localStorage.getItem('Products')) === null ? [] : JSON.parse(localStorage.getItem('Products')),
@@ -20,7 +20,7 @@ export const productReducer = (state = initialState, action) => {
       return {...state, showProduct: true}
     }
     if(action.type === ADD_TO_BASKET){
-      let tempProduct = state.products.map(item => {
+      let tempProducts = state.products.map(item => {
         if(item.id === action.payload) {
           item = {...item, quantity: item.quantity + 1}
         }
@@ -35,8 +35,7 @@ export const productReducer = (state = initialState, action) => {
       let tmpArr = []
       tmpArr =  [...state.basketProducts, ...tempBasket]
       localStorage.setItem('Basket', JSON.stringify(tmpArr));
-      console.log(tmpArr)
-      localStorage.setItem('Products', JSON.stringify(tempProduct));
+      localStorage.setItem('Products', JSON.stringify(tempProducts));
       return {
         ...state,
         products: JSON.parse(localStorage.getItem('Products')),
